@@ -1,65 +1,65 @@
-const {Router} = require('express');
-const express = require('express');
-const asyncHandler = require('express-async-handler')
-
-const Wilder = require('../models/Wilder')
-
-const router = Router();
+const {Router}: any = require('express');
+const express: any = require('express');
+import { Request, Response, NextFunction } from 'express';
+const asyncHandler: any = require('express-async-handler')
+import { wilder } from "../models/Wilder";
+import { IWilder } from "../models/Wilder";
+const router: any = Router();
 
 // REST API
 // const routes = ['GET /api/wilders', 'GET /api/wilders/:id', 'POST /api/wilders', 'UPDATE /api/wilders/:id', 'DELETE /api/wilders/:id']
-router.use(express.json())
+router.use(express.json(String))
 
 function runAsyncWrapper(callback){
-    return function(req, res, next){
+    return function(req: String, res: Response, next: String){
         callback(req, res, next).catch(next);
     };
 }
 
 router.route('')
-.get(asyncHandler(async (req, res, next) => {
+.get(asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
     async function runAsync(){
-        const wilders = await Wilder.find({}).exec()
+        const wilders: IWilder[] = await wilder.find({}).exec()
         res.status(200).send(wilders)
     }
     runAsync().catch(next);
 }))
 
-.post(asyncHandler(async (req, res, next) => {
+.post(asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
     async function runAsync(){
     if(!req.body.skills){
         return next(new Error('No skills added! Please change.'))
     }
-    const wilder = await Wilder.create(req.body)
-    res.status(201).send(wilder)
+    const wilderCreate: IWilder = new wilder(req.body)
+    res.status(201).send(wilderCreate)
 }
     runAsync();
 }))
 
 router.route('/:id')
-.put(asyncHandler(async(req, res, next) => {
+.put(asyncHandler(async(req: Request, res: Response, next: NextFunction) => {
     async function runAsync(){
         const id = req.params.id
 
         // 1 does the user exist?
 
         // 2 do we have a valid payload?
-    const updated = await Wilder.findByIdAndUpdate({ _id: id }, { name: req.body.name }, { new: true });
+    const updated: IWilder[] = await wilder.findByIdAndUpdate({ _id: id }, { name: req.body.name }, { new: true });
     return res.send(updated)
     }
     runAsync().catch(next);
 }))
 
-.delete(asyncHandler(async(req, res, next) => {
+.delete(asyncHandler(async(req: Request, res: Response, next: NextFunction) => {
     async function runAsync(){
-    const deleted = await Wilder.deleteOne({name: req.body.name}).exec();
+    const deleted = await wilder.deleteOne({name: req.body.name});
     res.send(deleted);
 }
     runAsync().catch(next);
 }))
 
 
-module.exports = router
+module.exports = router;
 /*
 const WilderModel = require("../models/Wilder");
 

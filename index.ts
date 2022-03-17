@@ -1,16 +1,23 @@
-const express = require("express");
-const app = express();
+export {};
+import { SendHandle } from "child_process";
+import { connect } from "./db/connect";
+
+connect();
+const express: any = require("express");
+const app: any = express();
+/*
 const mongoose = require("mongoose");
 const WilderModel = require("./models/Wilder");
-const PORT = 3002;
 const connect = require("./db/connect");
-const wilderRouter = require("./controllers/WilderControllers");
+*/
+const PORT: Number = 3002;
+const wilderRouter: String = require("./controllers/WilderControllers");
 
-var cors = require('cors');
+var cors: any = require('cors');
 
 app.use(cors());
 
-app.get("/", (req, res) => {
+app.get("/", (req: Request, res: any) => {
     res.send("Hello World");
 
 })
@@ -39,7 +46,7 @@ app.get("/createUser", async(req, res) => {
 // Middleware
 
 
-app.use('/api/wilders', wilderRouter)
+app.use('/api/wilders', wilderRouter);
 
 // Start server
 app.listen(PORT, () => console.log(`Server started on port ${PORT}`));

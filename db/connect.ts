@@ -1,5 +1,5 @@
-const URL ="mongodb://127.0.0.1:27017/wilderdb"
-const mongoose = require("mongoose");
+const URL: string = "mongodb://127.0.0.1:27017/wilderdb"
+const mongoose: any = require('mongoose')
 
 // Database
 async function connect(){
@@ -12,4 +12,4 @@ async function connect(){
             (console.error(err.message))
         }
 }
-connect();
+export { connect };

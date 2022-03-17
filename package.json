@@ -2,7 +2,7 @@
   "name": "live-coding",
   "version": "1.0.0",
   "description": "npm package creation test",
-  "main": "index.js",
+  "main": "index.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon index.js"
@@ -10,12 +10,15 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@types/mongoose": "^5.11.97",
     "cors": "^2.8.5",
     "express": "^4.17.3",
     "express-async-handler": "^1.2.0",
-    "mongoose": "^6.2.4"
+    "mongoose": "^6.2.6"
   },
   "devDependencies": {
+    "@types/express": "^4.17.13",
+    "@types/node": "^17.0.21",
     "nodemon": "^2.0.15",
     "typescript": "^4.6.2"
   }

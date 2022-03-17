@@ -1,7 +1,7 @@
 // Wilder.js
-const mongoose = require('mongoose');
+import { Model, Document, Schema, model } from "mongoose";
 
-const wilderSchema = mongoose.Schema({
+const wilderSchema = new Schema({
     name: {
         type: String,
         required: true,
@@ -19,8 +19,20 @@ const wilderSchema = mongoose.Schema({
     }
 })
 
-module.exports = mongoose.model('Wilder', wilderSchema);
+interface IWilder extends Document {
+    name: String;
+    city: String;
+    completed: String;
+    skills: [
+        label: String,
+        votes: Number
+    ]
+}
 
+
+export { IWilder };
+const wilder: Model<IWilder> = model('Wilder', wilderSchema);
+export { wilder };
 /*
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
